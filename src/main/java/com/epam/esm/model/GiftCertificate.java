@@ -15,11 +15,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.envers.Audited;
 import org.springframework.hateoas.RepresentationModel;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -70,13 +73,14 @@ public class GiftCertificate extends RepresentationModel<GiftCertificate> implem
 
     @Valid
     @JsonView(Views.IgnoredView.class)
+    @Fetch(FetchMode.SUBSELECT)
     @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(
             name = "gift_certificate_tag",
             joinColumns = { @JoinColumn(name = "gift_certificate_id") },
             inverseJoinColumns = { @JoinColumn(name = "tag_id") }
     )
-    private Set<Tag> tags;
+    private Set<Tag> tags = new HashSet<>();
 
     @JsonIgnore
     @OneToMany(mappedBy = "giftCertificate")
@@ -100,5 +104,10 @@ public class GiftCertificate extends RepresentationModel<GiftCertificate> implem
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), id, name, description, price, duration, createDate, lastUpdateDate);
+    }
+
+    public void removeTag(Tag tag) {
+        this.tags.remove(tag);
+        tag.getGiftCertificates().remove(this);
     }
 }

@@ -1,6 +1,7 @@
 package com.epam.esm.model;
 
 import com.epam.esm.util.Views;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -9,7 +10,9 @@ import org.hibernate.envers.Audited;
 import org.springframework.hateoas.RepresentationModel;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -29,6 +32,10 @@ public class Tag extends RepresentationModel<Tag> implements Serializable {
     @Column(unique = true, nullable = false)
     private String name;
 
+    @JsonIgnore
+    @ManyToMany(mappedBy = "tags")
+    private Set<GiftCertificate> giftCertificates = new HashSet<>();
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -41,5 +48,12 @@ public class Tag extends RepresentationModel<Tag> implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), name);
+    }
+
+    @PreRemove
+    private void removeGiftCertificateAssociations() {
+        for (GiftCertificate giftCertificate : this.giftCertificates) {
+            giftCertificate.getTags().remove(this);
+        }
     }
 }
