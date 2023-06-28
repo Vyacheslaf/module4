@@ -24,7 +24,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Entity
 @Audited
-@Table(name = "`user`")
+@Table(name = "\"user\"")
 public class User extends RepresentationModel<User> implements Serializable, UserDetails {
     @JsonView(Views.ShortView.class)
     @Id

@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Entity
 @Audited
-@Table(name = "`order`")
+@Table(name = "\"order\"")
 public class Order extends RepresentationModel<Order> implements Serializable {
     private static final String ISO_8601_PATTERN = "yyyy-MM-dd'T'HH:mm:ss.SSS";
 
