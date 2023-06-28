@@ -45,9 +45,9 @@ public class SecurityConfig {
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
-                        authorize -> authorize
-                                .requestMatchers(HttpMethod.POST, guestPostPatterns).permitAll()
-                                .requestMatchers(HttpMethod.GET, guestGetPatterns).permitAll()
+                        (authz) -> authz
+                                .antMatchers(HttpMethod.POST, guestPostPatterns).permitAll()
+                                .antMatchers(HttpMethod.GET, guestGetPatterns).permitAll()
                                 .anyRequest().authenticated())
                 .sessionManagement(sessionManagement -> sessionManagement
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))

@@ -5,7 +5,7 @@ import com.epam.esm.dto.JwtResponse;
 import com.epam.esm.service.AuthenticationService;
 import com.epam.esm.util.Views;
 import com.fasterxml.jackson.annotation.JsonView;
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;

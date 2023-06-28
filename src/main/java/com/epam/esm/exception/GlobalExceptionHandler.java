@@ -1,6 +1,6 @@
 package com.epam.esm.exception;
 
-import jakarta.validation.ConstraintViolationException;
+import javax.validation.ConstraintViolationException;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
@@ -153,6 +153,21 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     public void handleNoContentException() {
     }
 
-    private record ErrorResponse(String errorMessage, String errorCode) {
+    private class ErrorResponse {
+        private String errorMessage;
+        private String errorCode;
+
+        public ErrorResponse(String errorMessage, String errorCode) {
+            this.errorMessage = errorMessage;
+            this.errorCode = errorCode;
+        }
+
+        public String getErrorMessage() {
+            return errorMessage;
+        }
+
+        public String getErrorCode() {
+            return errorCode;
+        }
     }
 }

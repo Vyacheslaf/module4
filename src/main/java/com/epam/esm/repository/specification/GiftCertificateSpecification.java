@@ -6,7 +6,7 @@ import com.epam.esm.model.GiftCertificate_;
 import com.epam.esm.model.Tag;
 import com.epam.esm.model.Tag_;
 import com.epam.esm.dto.SearchCriteria;
-import jakarta.persistence.criteria.*;
+import javax.persistence.criteria.*;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.jpa.domain.Specification;
 

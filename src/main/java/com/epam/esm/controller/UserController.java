@@ -7,7 +7,7 @@ import com.epam.esm.exception.NoContentException;
 import com.epam.esm.service.UserService;
 import com.epam.esm.util.Views;
 import com.fasterxml.jackson.annotation.JsonView;
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.IanaLinkRelations;

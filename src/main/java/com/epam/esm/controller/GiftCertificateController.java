@@ -9,7 +9,7 @@ import com.epam.esm.service.GiftCertificateService;
 import com.epam.esm.dto.SearchCriteria;
 import com.epam.esm.util.Views;
 import com.fasterxml.jackson.annotation.JsonView;
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.*;
 import org.springframework.http.HttpStatus;
