@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class TagServiceTest {
+public class TagServiceImplTest {
 
     private static final int TAG_LIST_SIZE = 3;
     private static TagRepository tagRepository;

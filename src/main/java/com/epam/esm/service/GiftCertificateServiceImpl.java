@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 @Service
 public class GiftCertificateServiceImpl implements GiftCertificateService {
     private static final String TIMEZONE = "UTC";
-    private static final String SORT_PATTERN = "^((name|createDate|lastUpdateDate).(asc|desc)){1}$";
+    private static final String SORT_PATTERN = "^((name|createDate|lastUpdateDate).(asc|desc))$";
     private static final String SORT_DIRECTION_ASC = "asc";
     private static final String SORT_DIRECTION_DESC = "desc";
     private static final String SORT_REPLACE_PATTERN = "\\.";
@@ -104,7 +104,7 @@ public class GiftCertificateServiceImpl implements GiftCertificateService {
 
     private Set<Tag> prepareTags(Set<Tag> tags) {
         if (tags == null) {
-            return null;
+            return tags;
         }
         if (!tags.isEmpty()
                 && (tags.contains(null) || (tags.stream().map(Tag::getName).anyMatch(StringUtils::isBlank)))) {

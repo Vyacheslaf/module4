@@ -12,6 +12,7 @@ import org.springframework.hateoas.RepresentationModel;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -53,4 +54,22 @@ public class Order extends RepresentationModel<Order> implements Serializable {
     @JsonFormat(pattern = ISO_8601_PATTERN)
     @Column(name = "purchase_date")
     private LocalDateTime purchaseDate;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Order order = (Order) o;
+        return id == order.id && userId == order.userId && cost == order.cost
+                && Objects.equals(user, order.user)
+                && Objects.equals(giftCertificate, order.giftCertificate)
+                && Objects.equals(giftCertificateId, order.giftCertificateId)
+                && Objects.equals(purchaseDate, order.purchaseDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), id, user, userId, giftCertificate, giftCertificateId, cost, purchaseDate);
+    }
 }

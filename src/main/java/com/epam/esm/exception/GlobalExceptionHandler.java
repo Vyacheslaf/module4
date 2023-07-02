@@ -151,6 +151,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @ExceptionHandler(NoContentException.class)
     public void handleNoContentException() {
+        //Empty method for return HttpResponse with NO_CONTENT status
     }
 
     private class ErrorResponse {

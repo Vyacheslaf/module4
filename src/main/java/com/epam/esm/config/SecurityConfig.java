@@ -45,7 +45,7 @@ public class SecurityConfig {
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
-                        (authz) -> authz
+                        authz -> authz
                                 .antMatchers(HttpMethod.POST, guestPostPatterns).permitAll()
                                 .antMatchers(HttpMethod.GET, guestGetPatterns).permitAll()
                                 .anyRequest().authenticated())
