@@ -1,5 +1,7 @@
 package com.epam.esm.controller;
 
+import com.epam.esm.dto.OrderDto;
+import com.epam.esm.dto.UserDto;
 import com.epam.esm.model.Order;
 import com.epam.esm.model.Tag;
 import com.epam.esm.model.User;
@@ -76,7 +78,8 @@ public class UserController {
     @JsonView(Views.FullView.class)
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(produces = "application/hal+json")
-    public User createUser(@Valid @RequestBody User user) {
+    public User createUser(@Valid @RequestBody UserDto userDto) {
+        User user = userDto.convertToUser();
         user = userService.create(user);
         user.add(linkTo(UserController.class).slash(user.getId()).withSelfRel());
         user.add(linkTo(UserController.class).withRel(LinkRelation.of(PARENT_RELATION_NAME)));
@@ -122,8 +125,9 @@ public class UserController {
     @PostMapping(value = "/{id}/order",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = "application/hal+json")
-    public Order createOrder(@Valid @RequestBody Order order,
+    public Order createOrder(@Valid @RequestBody OrderDto orderDto,
                              @PathVariable long id) {
+        Order order = orderDto.convertToOrder();
         order.setUserId(id);
         order = userService.createOrder(order);
         return addLinksToOrder(id, order);
