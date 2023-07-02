@@ -93,7 +93,8 @@ public class GiftCertificateController {
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = "application/hal+json")
-    public GiftCertificate create(@Valid @RequestBody GiftCertificate certificate) {
+    public GiftCertificate create(@Valid @RequestBody GiftCertificateDto certificateDto) {
+        GiftCertificate certificate = certificateDto.convertToGiftCertificate();
         return addLinksToGiftCertificate(giftCertificateService.create(certificate));
     }
 
