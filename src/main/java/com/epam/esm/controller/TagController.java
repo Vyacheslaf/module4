@@ -1,5 +1,6 @@
 package com.epam.esm.controller;
 
+import com.epam.esm.dto.TagDto;
 import com.epam.esm.exception.NoContentException;
 import com.epam.esm.model.Tag;
 import com.epam.esm.service.TagService;
@@ -11,8 +12,8 @@ import org.springframework.hateoas.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,6 +31,11 @@ public class TagController {
     @Autowired
     public TagController(TagService tagService) {
         this.tagService = tagService;
+    }
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        binder.setValidator(null);
     }
 
     @JsonView(Views.ShortView.class)
@@ -62,7 +68,8 @@ public class TagController {
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = "application/hal+json")
-    public Tag create(@Valid @RequestBody Tag tag, BindingResult bindingResult) {
+    public Tag create(@Valid @RequestBody TagDto tagDto) {
+        Tag tag = tagDto.convertToTag();
         return addLinksToTag(tagService.create(tag));
     }
 
