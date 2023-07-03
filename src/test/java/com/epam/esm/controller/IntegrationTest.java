@@ -7,15 +7,13 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.jdbc.Sql;
 
 import java.net.URI;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class IntegrationTest {
+class IntegrationTest {
     @LocalServerPort
     private int port;
 
@@ -24,7 +22,7 @@ public class IntegrationTest {
 
 //    @Sql({"classpath:schema.sql"})
     @Test
-    public void findAllTest() {
+    void findAllTest() {
         String url = "http://localhost:" + port + "/jpa/certificate";
         ResponseEntity<String> responseEntity = this.restTemplate.getForEntity(URI.create(url), String.class);
         assertNotEquals(HttpStatus.NOT_FOUND, responseEntity.getStatusCode());
