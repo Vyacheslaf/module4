@@ -86,9 +86,9 @@ test {
 }
 
 jacocoTestReport {
-    reports {
+/*    reports {
         xml.required = true
-    }
+    }*/
     dependsOn test
 }
 
