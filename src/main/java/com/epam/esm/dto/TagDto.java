@@ -12,11 +12,8 @@ import java.io.Serializable;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 public class TagDto implements Serializable {
-    @JsonView(Views.ShortView.class)
     @NotBlank(message = "name of tag must not be empty")
-    @Column(unique = true, nullable = false)
     private String name;
 
     public Tag convertToTag() {
