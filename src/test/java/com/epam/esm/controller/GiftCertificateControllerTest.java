@@ -44,4 +44,15 @@ class GiftCertificateControllerTest {
         assertEquals(giftCertificateDto.getDuration(),
                      giftCertificateController.create(giftCertificateDto).getDuration());
     }
+
+    @Test
+    void findByIdTest() {
+        long giftCertificateId = 1;
+        GiftCertificate giftCertificate = new GiftCertificate();
+        giftCertificate.setId(giftCertificateId);
+
+        when(giftCertificateService.findById(giftCertificateId)).thenReturn(giftCertificate);
+
+        assertEquals(giftCertificateId, giftCertificateController.findById(giftCertificateId).getId());
+    }
 }
