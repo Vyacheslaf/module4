@@ -1,18 +1,18 @@
 plugins {
-    id 'war'
-//    id 'java'
+//    id 'war'
+    id 'java'
     id 'io.spring.dependency-management' version '1.1.0'
     id 'org.springframework.boot' version '2.7.13'
     id "io.freefair.lombok" version "8.0.1"
     id 'jacoco'
     id 'org.sonarqube' version '4.2.1.3168'
 }
-
+/*
 bootWar {
     archiveFileName = 'rest-api-module2.war'
-}
+}*/
 
-/*tasks.named('jar') {
+tasks.named('jar') {
     manifest {
         attributes(
                 'Main-Class': 'com.epam.esm.Application'
@@ -24,7 +24,7 @@ bootWar {
         }
     }
 	duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-}*/
+}
 
 group = 'com.epam.esm'
 version = '1.0-SNAPSHOT'
@@ -80,6 +80,13 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter'
 // https://mvnrepository.com/artifact/org.mockito/mockito-core
     testImplementation 'org.mockito:mockito-core:5.4.0'
+
+// https://mvnrepository.com/artifact/org.testcontainers/testcontainers
+    testImplementation 'org.testcontainers:testcontainers:1.18.3'
+// https://mvnrepository.com/artifact/org.testcontainers/postgresql
+    testImplementation 'org.testcontainers:postgresql:1.18.3'
+// https://mvnrepository.com/artifact/org.testcontainers/junit-jupiter
+    testImplementation 'org.testcontainers:junit-jupiter:1.18.3'
 }
 
 test {
